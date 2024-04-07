@@ -108,6 +108,13 @@
 			<artifactId>spring-security-oauth2-resource-server</artifactId>
 		</dependency>
 
+		<!--keycloak 服务调用, manual add jsr305 for admin client will exclude it -->
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-admin-client</artifactId>
+			<version>${version.org.keycloak}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
