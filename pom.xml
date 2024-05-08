@@ -33,11 +33,11 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.camunda.bpm.springboot</groupId>
-            <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-            <version>7.19.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.camunda.bpm.springboot</groupId>-->
+<!--            <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>-->
+<!--            <version>7.19.0</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>cn.sparrowmini</groupId>
             <artifactId>sparrow-bpm</artifactId>
