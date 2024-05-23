@@ -16,7 +16,10 @@
         <java.version>11</java.version>
         <version.org.keycloak>21.1.1</version.org.keycloak>
         <hibernate.version>5.6.5.Final</hibernate.version>
-        <version.org.kie>7.73.0.Final</version.org.kie>
+        <version.org.kie>7.74.1.Final</version.org.kie>
+        <version.io.swagger>1.6.2</version.io.swagger>
+        <version.org.apache.cxf>3.4.5</version.org.apache.cxf>
+        <version.org.webjars.swagger-ui>2.2.10</version.org.webjars.swagger-ui>
     </properties>
 
 
@@ -43,6 +46,18 @@
             <artifactId>sparrow-bpm</artifactId>
             <version>0.2.0</version>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>cn.sparrowmini</groupId>-->
+<!--            <artifactId>sparrow-jbpm-ext</artifactId>-->
+<!--            <version>0.0.1</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.kie</groupId>-->
+<!--            <artifactId>kie-server-spring-boot-starter</artifactId>-->
+<!--            <version>${version.org.kie}</version>-->
+<!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>cn.sparrowmini</groupId>-->
 <!--            <artifactId>sparrow-keycloak-adapter</artifactId>-->
@@ -90,6 +105,24 @@
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>
+
+        <!-- Swagger -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
+            <version>${version.org.apache.cxf}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jaxrs</artifactId>
+            <version>${version.io.swagger}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.ws.rs</groupId>
+                    <artifactId>jsr311-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
@@ -99,6 +132,12 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.protobuf</groupId>
+                    <artifactId>protobuf-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--keycloak 集成 spring-->
         <dependency>
@@ -133,6 +172,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.11</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.protobuf</groupId>
+                    <artifactId>protobuf-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -153,6 +198,10 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
         </dependency>
     </dependencies>
     <build>
