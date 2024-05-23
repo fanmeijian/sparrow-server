@@ -11,6 +11,7 @@ import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurer
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -34,6 +35,8 @@ import cn.sparrowmini.org.service.repository.EmployeeUserRepository;
 @Configuration("kieServerSecurity")
 @EnableWebSecurity
 public class DefaultWebSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
+	@Value("${authorize.permitall}")
+	private String[] permitall;
 
 	@Autowired
 	private EmployeeUserRepository employeeUserRepository;
@@ -43,11 +46,8 @@ public class DefaultWebSecurityConfig extends KeycloakWebSecurityConfigurerAdapt
 		super.configure(http);
 		http.cors().and().csrf().disable().authorizeRequests(authorize -> {
 			try {
-				authorize
-						.antMatchers("/v3/**", "/swagger-ui/**", "/rest/swagger-ui/**", "/h2-console/**",
-								"/rest/swagger.json", "/rest/api-docs", "/rest/lib/**", "/rest/images/**",
-								"/rest/css/**", "/rest/swagger*")
-						.permitAll().anyRequest().authenticated().and().headers().frameOptions().disable();
+				authorize.antMatchers(this.permitall).permitAll().anyRequest().authenticated().and().headers()
+						.frameOptions().disable();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -94,7 +94,7 @@ public class DefaultWebSecurityConfig extends KeycloakWebSecurityConfigurerAdapt
 		return new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
 
 	}
-	
+
 	@Bean
 	Keycloak keycloak(KeycloakSpringBootProperties props) {
 		return KeycloakBuilder.builder() //
