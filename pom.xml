@@ -42,19 +42,6 @@
 			<version>0.2.1</version>
 		</dependency>
 
-		<!--部署流程服务,jbpm扩展服务-->
-		<dependency>
-			<groupId>cn.sparrowmini</groupId>
-			<artifactId>sparrow-jbpm-ext</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-
-		<!--集成JBPM-->
-		<dependency>
-			<groupId>org.kie</groupId>
-			<artifactId>kie-server-spring-boot-starter</artifactId>
-			<version>${version.org.kie}</version>
-		</dependency>
 
 		<!--用户服务集成KEYCLOAK的实现-->
 		<dependency>
@@ -63,24 +50,6 @@
 			<version>0.0.2</version>
 		</dependency>
 
-
-		<!-- Jbpm Swagger 文档-->
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-rs-service-description-swagger</artifactId>
-			<version>${version.org.apache.cxf}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-jaxrs</artifactId>
-			<version>${version.io.swagger}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.ws.rs</groupId>
-					<artifactId>jsr311-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 
 		<!--SWAGGER UI-->
 		<dependency>
