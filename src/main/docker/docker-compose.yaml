@@ -1,0 +1,28 @@
+services:
+  dengbo-service:
+    image: dengbo-service:1.0
+    ports:
+      - 8081:8080 
+    environment:
+      SPRING_APPLICATION_JSON: >
+        {
+          "server.port": 8080,
+          "server.servlet.context-path": "/dengbo-service",
+          "spring.datasource.url": "jdbc:postgresql://192.168.65.2:5432/dengbo",
+          "spring.datasource.username": "*",
+          "spring.datasource.password": "*",
+          "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.PostgreSQLDialect",
+          "keycloak.auth-server-url": "https://keycloak.linkair-tech.cn",
+          "keycloak.realm": "dengbo",
+          "keycloak.resource": "dengbo-service",
+          "keycloak.credentials.secret": "*",
+          "sparrow.cos.tx.secretId": "*",
+          "sparrow.cos.tx.secretKey": "*",
+          "sparrow.cos.tx.region": "ap-guangzhou",
+          "sparrow.cos.tx.bucket": "*",
+          "sparrow.cos.tx.allowPrefixes": "*",
+          "spring.data.solr.host": "*",
+          "spring.data.solr.prefix": "*"
+        }
+      SPRING_PROFILES_ACTIVE: prd
+      
