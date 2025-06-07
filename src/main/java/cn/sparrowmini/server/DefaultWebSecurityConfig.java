@@ -29,9 +29,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import cn.sparrowmini.common.CurrentUserFilter;
-import cn.sparrowmini.org.service.repository.EmployeeUserRepository;
-
 @EnableWebSecurity
 public class DefaultWebSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 	@Override
