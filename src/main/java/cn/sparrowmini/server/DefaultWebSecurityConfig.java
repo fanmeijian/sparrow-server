@@ -32,29 +32,18 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import cn.sparrowmini.common.CurrentUserFilter;
 import cn.sparrowmini.org.service.repository.EmployeeUserRepository;
 
-@Configuration("kieServerSecurity")
 @EnableWebSecurity
 public class DefaultWebSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
-	@Value("${authorize.permitall}")
-	private String[] permitall;
-
-	@Autowired
-	private EmployeeUserRepository employeeUserRepository;
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		super.configure(http);
+		http.headers().frameOptions().disable();
 		http.cors().and().csrf().disable().authorizeRequests(authorize -> {
-			try {
-				authorize.antMatchers(this.permitall).permitAll().anyRequest().authenticated().and().headers()
-						.frameOptions().disable();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}).oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt).headers().frameOptions().disable();
+			authorize.antMatchers("/v3/**", "/swagger-ui/**", "/h2-console/**").permitAll().anyRequest()
+					.authenticated();
+		}).oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
 
-		http.addFilterBefore(new CurrentUserFilter(this.employeeUserRepository), LogoutFilter.class);
-
+		http.addFilterBefore(new CurrentUserFilter(), LogoutFilter.class);
 	}
 
 	@Autowired
@@ -93,17 +82,6 @@ public class DefaultWebSecurityConfig extends KeycloakWebSecurityConfigurerAdapt
 	protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
 		return new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
 
-	}
-
-	@Bean
-	Keycloak keycloak(KeycloakSpringBootProperties props) {
-		return KeycloakBuilder.builder() //
-				.serverUrl(props.getAuthServerUrl()) //
-				.realm(props.getRealm()) //
-				.grantType(OAuth2Constants.CLIENT_CREDENTIALS) //
-				.clientId(props.getResource()) //
-				.clientSecret((String) props.getCredentials().get("secret")) //
-				.build();
 	}
 
 }
