@@ -1,0 +1,1 @@
+docker build -f src/main/docker/Dockerfile -t youweisoft/sparrow-service:1.0 .
